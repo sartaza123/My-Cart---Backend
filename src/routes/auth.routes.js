@@ -1,7 +1,9 @@
 // authentication routing ====================
 
+const { createUser } = require("../controllers/auth.controller");
+
 function authRoutes(app) {
-  // app.post("/register", createUser);
+  app.post("/api/register", createUser);
   //   app.post("/loginr", authController);
 }
 

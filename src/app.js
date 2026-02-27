@@ -17,6 +17,8 @@ mongoose
     console.error("Error connecting to MongoDB:", error);
   }); // while error
 
+app.use(express.json()); // json middleware
+
 productRoutes(app); // using product routes function
 authRoutes(app); // using auth routes function
 cartRoutes(app); // using cart routes function
