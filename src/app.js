@@ -3,13 +3,13 @@ const mongoose = require("mongoose");
 const productRoutes = require("./routes/product.routes");
 const authRoutes = require("./routes/auth.routes");
 const cartRoutes = require("./routes/cart.routes");
+require("dotenv").config();
+
 const app = express();
 
 // conncting DB usin mongoose
 mongoose
-  .connect(
-    "mongodb+srv://sartaza123_db_user:KKn1zmWVNzId1th5@cluster0.xwsqjv7.mongodb.net/",
-  )
+  .connect(process.env.MONGO_URI)
   .then(() => {
     console.log("Connected to MongoDB");
   }) // while connect
