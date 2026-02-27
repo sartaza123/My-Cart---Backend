@@ -50,7 +50,9 @@ async function loginUser(req, res) {
       }
 
       //   JWT Token =====================================
-      var token = jwt.sign({ id: data._id }, process.env.JWT_SECRET);
+      var token = jwt.sign({ id: data._id }, process.env.JWT_SECRET, {
+        expiresIn: "1h",
+      });
 
       res.status(200).send({
         user: {
