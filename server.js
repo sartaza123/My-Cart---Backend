@@ -1,4 +1,3 @@
-const cors = require("cors");
 const app = require("./src/app");
 require("dotenv").config();
 
