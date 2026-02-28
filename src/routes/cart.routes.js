@@ -7,7 +7,7 @@ const {
 
 const verifyToken = require("../middleware/auth.middleware");
 
-// cart routing ====================
+// cart routes CRUD opeations ====================
 function cartRoutes(app) {
   // POST   /api/cart
   app.post("/api/cart", verifyToken, addToCart);
