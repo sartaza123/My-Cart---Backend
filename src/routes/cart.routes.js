@@ -2,6 +2,7 @@ const {
   addToCart,
   updateCart,
   removeFromCart,
+  getCartItems,
 } = require("../controllers/cart.controller");
 
 const verifyToken = require("../middleware/auth.middleware");
@@ -16,6 +17,9 @@ function cartRoutes(app) {
 
   // DELETE /api/cart/:id
   app.delete("/api/cart/:id", verifyToken, removeFromCart);
+
+  // DELETE /api/cart/
+  app.get("/api/cart", verifyToken, getCartItems);
 }
 
 module.exports = cartRoutes;

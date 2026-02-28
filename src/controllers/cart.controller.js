@@ -92,4 +92,23 @@ async function removeFromCart(req, res) {
   }
 }
 
-module.exports = { addToCart, updateCart, removeFromCart };
+// GET logged-in user's cart items
+async function getCartItems(req, res) {
+  try {
+    const cartItems = await cartModel
+      .find({ user: req.user._id })
+      .populate("product");
+
+    res.status(200).json({
+      message: "Cart fetched successfully",
+      cartItems,
+    });
+  } catch (err) {
+    res.status(500).json({
+      message: "Something went wrong",
+      error: err.message,
+    });
+  }
+}
+
+module.exports = { addToCart, updateCart, removeFromCart, getCartItems };
