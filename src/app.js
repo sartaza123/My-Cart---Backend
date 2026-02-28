@@ -6,8 +6,10 @@ const cartRoutes = require("./routes/cart.routes");
 require("dotenv").config();
 
 const app = express();
+// ===============================================================
+// conncting DB using mongoose
+// ===============================================================
 
-// conncting DB usin mongoose
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => {
