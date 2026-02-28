@@ -1,6 +1,10 @@
 const productModel = require("../models/product.model");
 
-// fetch all product from database
+// =======================================================================
+// CRUD operations on product
+// =======================================================================
+
+// fetch all product from database =======================================
 async function fetchAllProduct(req, res) {
   try {
     const allProducts = await productModel.find();
@@ -17,12 +21,14 @@ async function fetchAllProduct(req, res) {
     });
   }
 }
+// =======================================================================
 
+// fetch product =========================================================
 async function fetchProduct(req, res) {
   const product = await productModel.findById(req.params.id);
 
   try {
-    res.status(200).json({ message: "Products fetched successfully", product });
+    res.status(200).json({ message: "Product fetched successfully", product });
   } catch (err) {
     // handle error
     res.status(500).json({
@@ -31,8 +37,9 @@ async function fetchProduct(req, res) {
     });
   }
 }
+// =======================================================================
 
-// CREATE product
+// CREATE product ========================================================
 async function createProduct(req, res) {
   try {
     const newProduct = await productModel.create(req.body);
@@ -49,7 +56,9 @@ async function createProduct(req, res) {
   }
 }
 
-// UPDATE product
+// =======================================================================
+
+// UPDATE product ========================================================
 async function updateProduct(req, res) {
   try {
     const updatedProduct = await productModel.findByIdAndUpdate(
@@ -73,8 +82,9 @@ async function updateProduct(req, res) {
     });
   }
 }
+// =======================================================================
 
-// DELETE product
+// DELETE product ========================================================
 async function deleteProduct(req, res) {
   try {
     const deletedProduct = await productModel.findByIdAndDelete(req.params.id);
@@ -93,6 +103,7 @@ async function deleteProduct(req, res) {
     });
   }
 }
+// =======================================================================
 
 module.exports = {
   fetchAllProduct,

@@ -1,11 +1,15 @@
 const mongoose = require("mongoose");
+// ============================================================
+// Products Model
+// ============================================================
 
+// ================== Product Schema ==========================
 const productSchema = new mongoose.Schema(
   {
     productName: {
-      type: String,
-      required: true,
-      trim: true,
+      type: String, // type
+      required: true, // for validation
+      trim: true, // trim method
     },
     price: {
       type: Number,
@@ -35,7 +39,10 @@ const productSchema = new mongoose.Schema(
   },
   { timestamps: true },
 );
+// ============================================================
 
 const productModel = mongoose.model("Product", productSchema);
 
 module.exports = productModel;
+
+// ============================================================

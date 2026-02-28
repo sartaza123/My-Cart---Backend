@@ -1,5 +1,11 @@
 const mongoose = require("mongoose");
 
+// ============================================================
+// Cart Model
+// ============================================================
+
+// ===================== Cart Schema ==========================
+
 const cartSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
@@ -15,6 +21,7 @@ const cartSchema = new mongoose.Schema({
     min: 1,
   },
 });
+// ============================================================
 
 const cartModel = mongoose.model("cart", cartSchema);
 

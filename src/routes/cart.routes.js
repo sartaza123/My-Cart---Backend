@@ -5,21 +5,25 @@ const {
   getCartItems,
 } = require("../controllers/cart.controller");
 
+// JWT token middleware ========================================
 const verifyToken = require("../middleware/auth.middleware");
 
-// cart routes CRUD opeations ====================
+// =============================================================
+// cart routes CRUD opeations
+// =============================================================
+
 function cartRoutes(app) {
-  // POST   /api/cart
+  // ================ POST ->  /api/cart =======================
   app.post("/api/cart", verifyToken, addToCart);
 
-  // PUT    /api/cart/:id
+  // ================ GET -> /api/cart/ ========================
+  app.get("/api/cart", verifyToken, getCartItems);
+
+  //================= PUT -> /api/cart/:id =====================
   app.put("/api/cart/:id", verifyToken, updateCart);
 
-  // DELETE /api/cart/:id
+  // ================ DELETE -> /api/cart/:id ==================
   app.delete("/api/cart/:id", verifyToken, removeFromCart);
-
-  // DELETE /api/cart/
-  app.get("/api/cart", verifyToken, getCartItems);
 }
-
+// =============================================================
 module.exports = cartRoutes;

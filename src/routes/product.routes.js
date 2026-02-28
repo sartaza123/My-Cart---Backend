@@ -6,21 +6,24 @@ const {
   deleteProduct,
 } = require("../controllers/product.controller");
 
-// product routing ====================
+// ==============================================================
+// product routing
+// ==============================================================
+
 function productRoutes(app) {
-  // GET all products
+  // GET all products ===============================
   app.get("/api/products", fetchAllProduct);
 
-  // GET single product
+  // GET single product =============================
   app.get("/api/products/:id", fetchProduct);
 
-  // CREATE product
+  // CREATE product =================================
   app.post("/api/products", createProduct);
 
-  // UPDATE product
+  // UPDATE product =================================
   app.put("/api/products/:id", updateProduct);
 
-  // DELETE product
+  // DELETE product =================================
   app.delete("/api/products/:id", deleteProduct);
 }
 

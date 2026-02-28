@@ -1,4 +1,4 @@
-// authentication routing ====================
+// authentication routing ===================================================
 
 const { createUser, loginUser } = require("../controllers/auth.controller");
 
@@ -8,3 +8,5 @@ function authRoutes(app) {
 }
 
 module.exports = authRoutes;
+
+// ===========================================================================

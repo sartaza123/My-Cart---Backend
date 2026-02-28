@@ -3,9 +3,9 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
-// ===========================================
+// ==================================================================
 //  Register user contrller function
-// ===========================================
+// ==================================================================
 async function createUser(req, res) {
   try {
     const { fullName, email, password } = req.body;
@@ -30,9 +30,9 @@ async function createUser(req, res) {
   }
 }
 
-// ===============================================
+// ==================================================================
 // login controller function
-// ===============================================
+// ==================================================================
 
 async function loginUser(req, res) {
   try {
@@ -49,7 +49,9 @@ async function loginUser(req, res) {
         return res.status(403).send({ message: "Password is incorrect" });
       }
 
-      //   JWT Token =====================================
+      //  ====================================
+      //  JWT Token
+      // =====================================
       var token = jwt.sign({ id: data._id }, process.env.JWT_SECRET, {
         expiresIn: "1h",
       });
@@ -63,7 +65,7 @@ async function loginUser(req, res) {
       });
     }
   } catch (err) {
-    // handle error
+    // ========== handle error ===========
     res.status(500).json({
       message: "something went Wrong",
       err: err.message,

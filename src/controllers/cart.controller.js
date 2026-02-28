@@ -1,38 +1,47 @@
 const cartModel = require("../models/cart.model");
 const productModel = require("../models/product.model");
 
-// Add product to cart
+// =======================================================================
+// CRUD operations on Cart
+// =======================================================================
+
+// ADD product to cart ===================================================
 async function addToCart(req, res) {
   try {
     const { productId, quantity } = req.body;
 
-    // Check if product exists
+    // check if product exists in database ===============================
     const product = await productModel.findById(productId);
     if (!product) {
       return res.status(404).json({ message: "Product not found" });
     }
+    // ===================================================================
 
-    // Check if item already in cart
+    // check if product already added in cart ============================
     const existingItem = await cartModel.findOne({
       user: req.user._id,
       product: productId,
     });
 
+    // if product already in cart, increase quantity =====================
     if (existingItem) {
       existingItem.quantity += quantity || 1;
       await existingItem.save();
 
-      return res
-        .status(200)
-        .json({ message: "Cart updated", data: existingItem });
+      return res.status(200).json({
+        message: "Cart updated",
+        data: existingItem,
+      });
     }
+    // ===================================================================
 
-    // Create new cart item
+    // create new cart item ==============================================
     const newCartItem = await cartModel.create({
       user: req.user._id,
       product: productId,
       quantity: quantity || 1,
     });
+    // ===================================================================
 
     res.status(201).json({
       message: "Product added to cart",
@@ -45,20 +54,25 @@ async function addToCart(req, res) {
     });
   }
 }
+// =======================================================================
 
-// Update cart item quantity
+// UPDATE cart item quantity =============================================
 async function updateCart(req, res) {
   try {
     const { quantity } = req.body;
 
+    // find cart item by id ==============================================
     const cartItem = await cartModel.findById(req.params.id);
 
     if (!cartItem) {
       return res.status(404).json({ message: "Cart item not found" });
     }
+    // ===================================================================
 
+    // update quantity ====================================================
     cartItem.quantity = quantity;
     await cartItem.save();
+    // ===================================================================
 
     res.status(200).json({
       message: "Cart item updated",
@@ -71,19 +85,26 @@ async function updateCart(req, res) {
     });
   }
 }
+// =======================================================================
 
-// Remove item from cart
+// DELETE cart item ======================================================
 async function removeFromCart(req, res) {
   try {
+    // find cart item by id ==============================================
     const cartItem = await cartModel.findById(req.params.id);
 
     if (!cartItem) {
       return res.status(404).json({ message: "Cart item not found" });
     }
+    // ===================================================================
 
+    // delete cart item ==================================================
     await cartItem.deleteOne();
+    // ===================================================================
 
-    res.status(200).json({ message: "Item removed from cart" });
+    res.status(200).json({
+      message: "Item removed from cart",
+    });
   } catch (err) {
     res.status(500).json({
       message: "Something went wrong",
@@ -91,13 +112,16 @@ async function removeFromCart(req, res) {
     });
   }
 }
+// =======================================================================
 
-// GET logged-in user's cart items
+// GET logged-in user's cart items ======================================
 async function getCartItems(req, res) {
   try {
+    // fetch cart items of current user ==================================
     const cartItems = await cartModel
       .find({ user: req.user._id })
-      .populate("product");
+      .populate("product"); // populate product details
+    // ===================================================================
 
     res.status(200).json({
       message: "Cart fetched successfully",
@@ -110,5 +134,11 @@ async function getCartItems(req, res) {
     });
   }
 }
+// =======================================================================
 
-module.exports = { addToCart, updateCart, removeFromCart, getCartItems };
+module.exports = {
+  addToCart,
+  updateCart,
+  removeFromCart,
+  getCartItems,
+};

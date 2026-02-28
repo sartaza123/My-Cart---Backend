@@ -1,10 +1,11 @@
 const mongoose = require("mongoose");
 
+//  user Model ======================================================
 const userSchema = new mongoose.Schema(
   {
     fullName: {
-      type: String,
-      required: true,
+      type: String, // type
+      required: true, // for validation
     },
     email: {
       type: String,
@@ -20,3 +21,5 @@ const userSchema = new mongoose.Schema(
 );
 
 module.exports = mongoose.model("User", userSchema);
+
+// ===================================================================
