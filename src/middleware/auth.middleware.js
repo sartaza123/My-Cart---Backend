@@ -22,7 +22,7 @@ async function verifyToken(req, res, next) {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
     // find user using decoded id ========================================
-    const user = await userModel.findById(decoded.id).select("-password");\
+    const user = await userModel.findById(decoded.id).select("-password");
 
     // if user not found =================================================
     if (!user) {
