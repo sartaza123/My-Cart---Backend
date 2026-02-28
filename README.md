@@ -185,8 +185,8 @@ Screenshots are included in submission.
 # 👨‍💻 Author
 
 **Md Sartaz Ansari**  
-Backend Developer  
-Node.js | Express | MongoDB  
+Full-Stack Developer  
+Node.js | Express | MongoDB
 
 GitHub: https://github.com/sartaza123
 
